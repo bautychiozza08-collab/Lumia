@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>LUMIA App</title>
+
+  <!-- PWA -->
+
+  <link
+    rel="manifest"
+    href="./manifest.json"
+  />
+
+  <meta
+    name="theme-color"
+    content="#8b5cf6"
+  />
+
+  <meta
+    name="description"
+    content="LUMIA, tu espacio inmersivo para estudiar con calma."
+  />
+
+  <!-- CSS -->
+
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  />
+
+  <!-- FONT -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+</head>
+
+<body>
+
+  <!-- FX -->
+
+  <div class="bg-gradient"></div>
+
+  <div class="aurora"></div>
+
+  <div class="floating-particles"></div>
+
+  <div class="cinematic-noise"></div>
+
+  <!-- LOADING -->
+
+  <div
+    class="loading-screen"
+    id="loadingScreen"
+  >
+
+    <div class="intro-orbit"></div>
+
+    <div class="loader-logo">
+      LUMIA
+    </div>
+
+    <p>
+      Inicializando tu universo...
+    </p>
+
+  </div>
+
+  <!-- LOCK -->
+
+  <section
+    class="lockscreen hidden"
+    id="lockscreen"
+  >
+
+    <div class="lock-card">
+
+      <span>LUMIA OS</span>
+
+      <h1>
+        Tu espacio está en pausa.
+      </h1>
+
+      <p>
+        Volvé cuando quieras seguir avanzando.
+      </p>
+
+      <button onclick="unlockApp()">
+        Desbloquear Lumia
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- LOGIN -->
+
+  <section
+    class="login-screen"
+    id="loginScreen"
+  >
+
+    <div class="login-card">
+
+      <span>LUMIA BETA</span>
+
+      <h1>
+        Bienvenido a tu espacio.
+      </h1>
+
+      <p>
+        Un universo visual para estudiar con calma,
+        ordenar tus tareas y transformar tu progreso
+        en algo vivo.
+      </p>
+
+      <input
+        id="loginName"
+        placeholder="Tu nombre"
+      />
+
+      <input
+        id="loginEmail"
+        placeholder="Tu email"
+      />
+
+      <button onclick="loginUser()">
+        Entrar a Lumia
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- APP -->
+
+  <div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+      <div>
+
+        <div class="side-logo">
+          LUMIA
+        </div>
+
+        <div class="side-menu">
+
+          <button
+            onclick="showPage('dashboard', this)"
+            class="side-link active"
+          >
+            🏠 Dashboard
+          </button>
+
+          <button
+            onclick="showPage('materias', this)"
+            class="side-link"
+          >
+            📚 Materias
+          </button>
+
+          <button
+            onclick="showPage('planner', this)"
+            class="side-link"
+          >
+            ✅ Planner
+          </button>
+
+          <button
+            onclick="showPage('focus', this)"
+            class="side-link"
+          >
+            🎧 Focus
+          </button>
+
+          <button
+            onclick="showPage('deepFocus', this)"
+            class="side-link"
+          >
+            🧘 Deep Focus
+          </button>
+
+          <button
+            onclick="showPage('calendario', this)"
+            class="side-link"
+          >
+            📅 Calendario
+          </button>
+
+          <button
+            onclick="showPage('progreso', this)"
+            class="side-link"
+          >
+            📊 Progreso
+          </button>
+
+          <button
+            onclick="showPage('world', this)"
+            class="side-link"
+          >
+            🌌 Mundo Lumia
+          </button>
+
+          <button
+            onclick="showPage('calma', this)"
+            class="side-link"
+          >
+            🌙 Modo calma
+          </button>
+
+          <button
+            onclick="showPage('journal', this)"
+            class="side-link"
+          >
+            📝 Diario
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="side-bottom">
+
+        <button
+          onclick="installApp()"
+          class="install-btn"
+        >
+          📲 Instalar app
+        </button>
+
+        <button
+          onclick="lockApp()"
+          class="theme-btn"
+        >
+          🔒 Bloquear
+        </button>
+
+        <button
+          onclick="toggleTheme()"
+          class="theme-btn"
+        >
+          🌗 Cambiar tema
+        </button>
+
+        <button
+          onclick="resetLumiaData()"
+          class="theme-btn"
+        >
+          ♻ Resetear datos
+        </button>
+
+        <button
+          onclick="logoutUser()"
+          class="logout-btn"
+        >
+          Salir
+        </button>
+
+      </div>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+
+        <div>
+
+          <h2 id="userGreeting">
+            Hola 👋
+          </h2>
+
+          <p id="dailyQuote">
+            Un paso a la vez. Lumia respira con vos.
+          </p>
+
+        </div>
+
+        <div class="music-box">
+
+          <button onclick="playAmbient('lofi')">
+            🎧 Lo-fi
+          </button>
+
+          <button onclick="playAmbient('rain')">
+            🌧 Lluvia
+          </button>
+
+          <button onclick="playAmbient('cafe')">
+            ☕ Café
+          </button>
+
+          <button onclick="stopAmbient()">
+            ⏸
+          </button>
+
+        </div>
+
+      </header>
+
+      <!-- DASHBOARD -->
+
+      <section
+        class="page"
+        id="dashboard"
+      >
+
+        <div class="hero-panel">
+
+          <div>
+
+            <span>
+              Tu espacio de estudio inmersivo
+            </span>
+
+            <h1>
+              Ordená el caos. Avanzá tranquilo.
+            </h1>
+
+            <p>
+              LUMIA convierte tu progreso en un mundo vivo:
+              tareas, focus, calma y hábitos se transforman
+              en luz, niveles y evolución visual.
+            </p>
+
+            <div class="hero-actions">
+
+              <button onclick="showPage('focus')">
+                Empezar focus
+              </button>
+
+              <button
+                class="soft-btn"
+                onclick="activateCalmMode()"
+              >
+                Estoy saturado
+              </button>
+
+              <button
+                class="soft-btn"
+                onclick="showPage('world')"
+              >
+                Ver mi mundo
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- AI FLOAT -->
+
+  <div
+    class="ai-float"
+    onclick="toggleAI()"
+  >
+    ✨
+  </div>
+
+  <!-- AI CHAT -->
+
+  <div
+    class="ai-chat"
+    id="aiChat"
+  >
+
+    <div class="ai-top">
+
+      <h3>
+        Lumia Assistant
+      </h3>
+
+      <button onclick="toggleAI()">
+        ✕
+      </button>
+
+    </div>
+
+    <div
+      class="ai-messages"
+      id="aiMessages"
+    >
+
+      <div class="ai-msg">
+        Hola 👋 Estoy acá para acompañarte.
+      </div>
+
+    </div>
+
+    <div class="ai-input">
+
+      <input
+        id="aiInput"
+        placeholder="Escribí algo..."
+      />
+
+      <button onclick="sendAIMessage()">
+        →
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- INSTALL POPUP -->
+
+  <div
+    class="install-popup hidden"
+    id="installPopup"
+  >
+
+    <div>
+
+      <strong>
+        Instalar Lumia OS
+      </strong>
+
+      <p>
+        Convertí Lumia en tu espacio personal.
+      </p>
+
+    </div>
+
+    <button onclick="installApp()">
+      Instalar
+    </button>
+
+  </div>
+
+  <!-- NOTIFICATION -->
+
+  <div
+    class="notification hidden"
+    id="notification"
+  >
+    ✨ Guardado correctamente
+  </div>
+
+  <!-- JS -->
+
+  <script src="./app.js"></script>
+
+</body>
+
+</html>
